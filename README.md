@@ -1,5 +1,13 @@
 # MultiMarginal
 
+## Prepare
+
+Link data 
+
+```bash
+ln -s /home/ljb/WassersteinSBP/data data
+```
+
 ## Train
 
 ```bash
