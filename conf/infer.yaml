@@ -1,0 +1,24 @@
+hydra:
+  job:
+    name: infer
+    chdir: true
+  run:
+    dir: experiments/${exp_name}/${hydra.job.name}/${now:%Y-%m-%d_%H-%M-%S}
+  sweep:
+    dir: experiments/${exp_name}/${hydra.job.name}/${now:%Y-%m-%d_%H-%M-%S}
+    subdir: run${hydra.job.num}
+
+defaults:
+  - _self_
+  - model: unet
+  - dataset: mnist
+
+exp_name: debug
+seed: 3407
+
+SIGMA: 1 # 0.02
+EPSILON: 0.002
+
+batch_size: 64
+num_samples: 25
+checkpoint_path: # /home/ljb/MultiMarginal/experiments/gaussian2mnist

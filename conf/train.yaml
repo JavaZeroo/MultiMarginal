@@ -1,0 +1,27 @@
+hydra:
+  job:
+    name: train
+    chdir: true
+  run:
+    dir: experiments/${exp_name}/${hydra.job.name}/${now:%Y-%m-%d_%H-%M-%S}
+  sweep:
+    dir: experiments/${exp_name}/${hydra.job.name}/${now:%Y-%m-%d_%H-%M-%S}
+    subdir: run${hydra.job.num}
+
+defaults:
+  - _self_
+  - model: unet
+  - dataset: mnist
+
+exp_name: debug
+seed: 3407
+
+SIGMA: 1 # 0.02
+EPSILON: 0.1
+
+batch_size: 256
+epochs: 10
+lr: 1e-4
+refresh_rate: 4
+train_nums: 1000
+checkpoint_path: # /home/ljb/MultiMarginal/experiments/gaussian2mnist

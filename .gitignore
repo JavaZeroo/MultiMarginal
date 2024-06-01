@@ -1,0 +1,12 @@
+__pycache__/
+
+# outputs dir
+output/
+experiments/
+infer/
+train/
+
+nohup.out
+data/
+data
+fid/
