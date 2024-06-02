@@ -11,7 +11,7 @@ from rich.progress import track
 import hydra
 from omegaconf import DictConfig
 from utils.mydataset import imgDataset, gen_2d_data
-from utils.utils import save_gif_frame
+from utils.utils import save_gif_frame, draw_comapre_split
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Using device: {device}")
@@ -50,7 +50,7 @@ def main(cfg: DictConfig):
 
     data1_path = Path(cfg.dataset.data_path)
     vaild_font_names = [file.stem for file in data1_path.glob("*.png")]
-    data1_dataset = imgDataset(data1_path, vaild_font_names, image_size, False)
+    data1_dataset = imgDataset(data1_path, vaild_font_names, image_size, image_channels, False, cfg.num_samples)
     print("Length of dataset: ", len(data1_dataset))
 
     test_samples = cfg.num_samples
@@ -83,6 +83,8 @@ def main(cfg: DictConfig):
     pred_bridge, _ = inference(model, test_ts, test_P1_samples, test_samples, cfg.SIGMA)
 
     save_gif_frame(pred_bridge, log_dir, name="pred_infer.gif")
+
+    draw_comapre_split([pred_bridge]).savefig(log_dir / f'compare.png')
 
 if __name__ == "__main__":
     main()

@@ -60,7 +60,7 @@ def main(cfg: DictConfig):
     data1_path = Path(cfg.dataset.data_path)
     vaild_font_names = [file.stem for file in data1_path.glob("*.png")]
 
-    data1_dataset = imgDataset(data1_path, vaild_font_names, image_size, False, cfg.train_nums)
+    data1_dataset = imgDataset(data1_path, vaild_font_names, image_size, image_channels, False, cfg.train_nums)
     print("Length of dataset: ", len(data1_dataset))
 
     train_tgt_imgs_1 = torch.stack([data1_dataset[i] for i in range(cfg.train_nums)], dim=0)

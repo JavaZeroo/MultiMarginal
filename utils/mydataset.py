@@ -36,7 +36,7 @@ class BasicDataset(Dataset):
 
 
 class imgDataset(Dataset):
-    def __init__(self, dir, img_names, image_size, sketch, max_load=0):
+    def __init__(self, dir, img_names, image_size, image_channels, sketch, max_load=0):
         """
         TODO sketch need to be rewrite
         """
@@ -57,7 +57,8 @@ class imgDataset(Dataset):
             img_path = self.dir / img_name
             img = train_transform(Image.open(img_path).convert('RGB'))
             # convert to gray
-            # img = torch.mean(img, dim=0, keepdim=True)
+            if image_channels == 1:
+                img = torch.mean(img, dim=0, keepdim=True)
             
             if torch.any(torch.isnan(img)).item():
                 print(img_name)

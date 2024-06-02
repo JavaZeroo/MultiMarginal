@@ -20,7 +20,7 @@ SIGMA: 1 # 0.02
 EPSILON: 0.1
 
 batch_size: 256
-epochs: 10
+epochs: 100
 lr: 1e-4
 refresh_rate: 4
 train_nums: 1000

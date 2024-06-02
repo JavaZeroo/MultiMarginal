@@ -1,4 +1,4 @@
 # conf/dataset/mnist.yaml
 image_size: 32
 data_path: /home/ljb/MultiMarginal/data/mnist_new
-image_channels: 3
+image_channels: 1
